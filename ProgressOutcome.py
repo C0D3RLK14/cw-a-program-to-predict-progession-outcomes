@@ -6,7 +6,7 @@ def progressOutcome(passCredit,deferCredit,failCredit):
         if deferCredit == 20:
             return "Progress (module trailer)"
         elif failCredit == 20:
-            return "Do not progress - module retriever"
+            return "Progress (module trailer)"
         else:
             return "Total incorrect"
     
