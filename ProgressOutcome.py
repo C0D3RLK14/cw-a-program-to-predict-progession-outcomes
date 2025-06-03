@@ -87,6 +87,8 @@ def validateCreditRange(credit):
         return credit
      else:
         raise Exception("Out of range")
+     
+progressOutcomes = []
 
 reEnter = True
 while reEnter:    
@@ -112,6 +114,7 @@ while reEnter:
             isExeption = False
     
     print(progressOutcome(passCredit,deferCredit,failCredit))
+    progressOutcomes.append(progressOutcome(passCredit,deferCredit,failCredit))
     print()
 
     rePrompt = True
@@ -121,6 +124,8 @@ while reEnter:
         reEnterInput = input()
         if reEnterInput.lower() == "q":
             print()
+            print(progressOutcomes)
+            print("Program quit successfully.")
             reEnter = False
             rePrompt = False
         elif reEnterInput.lower() == "y":
