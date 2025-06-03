@@ -86,7 +86,13 @@ def validateCreditRange(credit):
      if credit in creditRange:
         return credit
      else:
-        raise Exception("Out of range")
+        raise Exception("Out of range.")
+     
+def validateTotalCredit(passCredit,deferCredit,failCredit):
+    if passCredit + deferCredit + failCredit == 120:
+        return "Valid"
+    else:
+        raise Exception("Total incorrect.")
      
 progressOutcomes = []
 
@@ -100,6 +106,8 @@ while reEnter:
             passCredit = validateCreditRange(int(input("Enter your pass credits: ")))
             deferCredit = validateCreditRange(int(input("Enter your defer credits: ")))
             failCredit = validateCreditRange(int(input("Enter your fail credits: ")))
+
+            validateTotalCredit(passCredit,deferCredit,failCredit)
 
         except ValueError:
             print("Integers only")
