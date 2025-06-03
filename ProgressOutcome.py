@@ -95,6 +95,10 @@ def validateTotalCredit(passCredit,deferCredit,failCredit):
         raise Exception("Total incorrect.")
      
 progressOutcomes = []
+progressCount = 0
+trailerCount = 0
+retrieverCount = 0
+excludeCount = 0
 
 reEnter = True
 while reEnter:    
@@ -120,9 +124,23 @@ while reEnter:
         else:
             print()
             isExeption = False
+
+    currentProgressOutcome = progressOutcome(passCredit,deferCredit,failCredit)
     
-    print(progressOutcome(passCredit,deferCredit,failCredit))
-    progressOutcomes.append(progressOutcome(passCredit,deferCredit,failCredit))
+    print(currentProgressOutcome)
+
+    progressOutcomes.append(currentProgressOutcome)
+
+    if currentProgressOutcome == "Progress":
+        progressCount += 1
+    elif currentProgressOutcome == "Progress (module trailer)":
+        trailerCount += 1
+    elif currentProgressOutcome == "Do not progress - module retriever":
+        retrieverCount += 1
+    elif currentProgressOutcome == "Exclude":
+        excludeCount += 1
+    else:
+        raise Exception("Invalid progress outcome.")
     print()
 
     rePrompt = True
@@ -133,7 +151,14 @@ while reEnter:
         if reEnterInput.lower() == "q":
             print()
             print(progressOutcomes)
+            print()
+            print("""Progress outcomes: {} \n
+Progress (module trailer): {} \n
+Do not progress - module retriever: {} \n
+Exclude: {}""".format(progressCount,trailerCount,retrieverCount,excludeCount))
+            print()
             print("Program quit successfully.")
+            print()
             reEnter = False
             rePrompt = False
         elif reEnterInput.lower() == "y":
