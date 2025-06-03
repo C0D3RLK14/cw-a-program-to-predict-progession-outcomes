@@ -1,7 +1,3 @@
-passCredit = int(input("Enter your pass credits: "))
-deferCredit = int(input("Enter your defer credits: "))
-failCredit = int(input("Enter your fail credits: "))
-
 def progressOutcome(passCredit,deferCredit,failCredit):
     if passCredit == 120:
         return "Progress"
@@ -84,5 +80,59 @@ def progressOutcome(passCredit,deferCredit,failCredit):
             return "Exclude"
         else:
             return "Total incorrect"
+        
+def validateCreditRange(credit):
+     creditRange = [0,20,40,60,80,100,120]
+     if credit in creditRange:
+        return credit
+     else:
+        raise Exception("Out of range")
 
-print(progressOutcome(passCredit,deferCredit,failCredit))
+reEnter = True
+while reEnter:    
+
+    isExeption = True
+    while isExeption:   
+
+        try:
+            passCredit = validateCreditRange(int(input("Enter your pass credits: ")))
+            deferCredit = validateCreditRange(int(input("Enter your defer credits: ")))
+            failCredit = validateCreditRange(int(input("Enter your fail credits: ")))
+
+        except ValueError:
+            print("Integers only")
+            print()
+
+        except Exception as ex:
+            print(ex)
+            print()
+
+        else:
+            print()
+            isExeption = False
+    
+    print(progressOutcome(passCredit,deferCredit,failCredit))
+    print()
+
+    rePrompt = True
+    while rePrompt:
+        print("Would you like to enter another set of data?")
+        print("Enter 'y' for yes or 'q' to quit and view results: ")
+        reEnterInput = input()
+        if reEnterInput.lower() == "q":
+            print()
+            reEnter = False
+            rePrompt = False
+        elif reEnterInput.lower() == "y":
+            print()
+            reEnter = True
+            rePrompt = False
+        else:
+            print("Invalid input. Please try again.")
+            print()
+            reEnter = True
+
+
+
+
+
